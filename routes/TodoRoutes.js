@@ -1,5 +1,7 @@
 const router = require("express").Router();
-const { addTodo, getTodos, editTodo, deleteTodo } = require("../controllers/TodoControllers");
+const { getTodoByID, addTodo, getTodos, editTodo, deleteTodo } = require("../controllers/TodoControllers");
+
+router.param("Todo_ID", getTodoByID); // Find Specific Todo From DB
 
 // Route To Add Todo
 router.post("/addTodo", addTodo);
@@ -8,9 +10,9 @@ router.post("/addTodo", addTodo);
 router.get("/getTodos", getTodos);
 
 // Route To Edit Single Todo
-router.put("/editTodo/:todoID", editTodo);
+router.put("/editTodo/:Todo_ID", editTodo);
 
 // Route To Delete Single Todo
-router.delete("/deleteTodo/:todoID", deleteTodo);
+router.delete("/deleteTodo/:Todo_ID", deleteTodo);
 
 module.exports = router; // Exporting Router
