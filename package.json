@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "client": "cd client && npm start",
+    "dev": "nodemon app.js",
+    "prod": "concurrently -n 'Server, Client' -c 'red, green' \"nodemon app.js\" \"npm run client\""
   },
   "author": "Ajay Sharma",
   "license": "ISC",
