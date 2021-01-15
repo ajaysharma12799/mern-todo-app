@@ -1,22 +1,13 @@
-import React, { Component } from "react";
-import AppBar from "@material-ui/core/AppBar";
-import ToolBar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-
+import React from 'react';
 
 const Header = () => {
     return (
         <div>
-            <AppBar>
-                <ToolBar >
-                    <Typography
-                        variant="h6"
-                        color="inherit"
-                    >
-                        WELCOME TO MERN TODO APP
-                    </Typography>
-                </ToolBar>
-            </AppBar>
+            <nav class="navbar navbar-light bg-light">
+                <div class="container-fluid">
+                    <span class="navbar-brand mb-0 h1">MERN TODO APP</span>
+                </div>
+            </nav>
         </div>
     )
 }
