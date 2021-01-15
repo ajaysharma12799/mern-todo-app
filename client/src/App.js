@@ -1,13 +1,11 @@
 import React from 'react';
-import Header from './Components/Header/Header';
-import Form from './Components/TodoForm/Form';
-import Table from './Components/TodoTable/Table';
+
+import Todo from './Components/TODO/Todo';
 
 const App = () => {
   return (
     <div>
-      <Header/>
-      {/* <Form /> */}
+      <Todo />
     </div>
   )
 }
