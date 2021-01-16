@@ -1,21 +1,28 @@
 import React, { useState } from 'react';
 import { addTodos } from '../helper/APIHelper';
 
-
 const Form = () => {
 
-    const [ todos, setTodos ] = useState({
-        message: ""
-    });
-
-    const { message } = todos;
+    const [ message, setMessage ] = useState("");
 
     const handleChange = (event) => {
-        setTodos(event.target.value);
+        setMessage(event.target.value);
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        addTodos({message})
+        .then( (data) => {
+            if(data.errorMessage) {
+                console.log(data.errorMessage);
+            }
+            else {
+                setMessage("");
+            }
+        } )
+        .catch( (error) => {
+            console.log(`error in FORM.js : ${error}`);
+        } );
     }
 
     const DisplayForm = () => (
@@ -24,17 +31,17 @@ const Form = () => {
                 <div class="mb-3">
                     <input 
                         type="text" 
-                        class="form-control" 
+                        className="form-control" 
                         name="message" 
                         placeholder="Enter Your Task" 
-                        // value={ message }
-                        // onChange={ handleChange }
+                        value={ message }
+                        onChange={ handleChange }
                     />
                 </div>
                 <button 
                     type="submit" 
-                    class="btn btn-primary"
-                    // onClick={ handleSubmit }
+                    className="btn btn-primary"
+                    onClick={ handleSubmit }
                 >
                     ADD TODO
                 </button>
