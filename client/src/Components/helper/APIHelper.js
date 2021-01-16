@@ -29,10 +29,33 @@ export const addTodos = async (todo) => {
     } );
 }
 
-export const editTodos = async () => {
-
+export const editTodos = async (TodoID, UpdatedTodo) => {
+    return await fetch(`${API}/editTodo/${TodoID}`, {
+        method: "PUT",
+        header: {
+            Accept: "application/json"
+        },
+        body: UpdatedTodo
+    })
+    .then( (response) => {
+        return response.json();
+    } )
+    .catch( (error) => {
+        console.log(`error from edittodo : ${error}`);
+    } );
 }
 
-export const deleteTodos = async () => {
-
-}
+export const deleteTodos = async (TodoID) => {
+    return await fetch(`${API}/deleteTodo/${TodoID}`, {
+        method: "DELETE",
+        headers: {
+            Accept: "application/json"
+        }
+    })
+    .then( (response) => {
+        return response.json();
+    } )
+    .catch( (error) => {
+        console.log(`error from deletetodos : ${error}`);
+    } );
+}  
