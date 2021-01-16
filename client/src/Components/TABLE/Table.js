@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { getTodos } from '../helper/APIHelper';
+import { getTodos, deleteTodos } from '../helper/APIHelper';
 
 const Table = () => {
 
@@ -22,7 +22,22 @@ const Table = () => {
         preLoad();
     }, []);
 
-    console.log(todos);
+    const deleteThisTodo = (productID) => {
+        console.log(productID + "  product from deletethistodo");
+        deleteTodos(productID)
+        .then( (data) => {
+            console.log(JSON.stringify(data));
+            if(data.errorMessage) {
+                console.log(data.errorMessage);
+            }
+            else {
+                preLoad()
+            }
+        } )
+        .catch( (error) => {
+            console.log(`error from deletethistodo : ${error}`);
+        } );
+    }
 
     const DisplayTable = () => (
         <table class="table">
@@ -50,9 +65,21 @@ const Table = () => {
                 <th scope="row"> { index + 1 } </th>
                 <td> { SingleTodo.message } </td>
                 <td> { "Date Will Come" } </td>
-                <td> <button> Completed </button> </td>
+                <td> 
+                    <button
+                        // onClick={}
+                    > 
+                        Completed 
+                    </button> 
+                </td>
                 <td> <button> Edit </button> </td>
-                <td> <button> Delete </button> </td>
+                <td> 
+                    <button
+                        onClick={ () => { deleteThisTodo(SingleTodo._id) } }
+                    > 
+                        Delete 
+                    </button> 
+                </td>
             </tr>
             ) ) }
         </tbody>
