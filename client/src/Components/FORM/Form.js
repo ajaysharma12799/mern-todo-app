@@ -18,6 +18,7 @@ const Form = () => {
             }
             else {
                 setMessage("");
+                window.location.reload(false);
             }
         } )
         .catch( (error) => {
