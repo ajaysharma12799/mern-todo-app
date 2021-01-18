@@ -32,12 +32,6 @@ if(process.env.NODE_ENV === 'production') {
     });
 }
 
-app.get('/', (req, res) => {
-    res.json({
-        msg: "API Working SuccessFully"
-    });
-})
-
 app.listen( PORT, () => {
     console.log(`Server is Running at ${ PORT }`);
 } );
