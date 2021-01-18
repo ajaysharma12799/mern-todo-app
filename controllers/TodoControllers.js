@@ -1,4 +1,5 @@
 const TodoModel = require("../models/Todo");
+const { validationResult } = require('express-validator');
 
 exports.getTodoByID = async (req, res, next, Todo_ID) => {
     await TodoModel.findById(Todo_ID).exec()
@@ -12,6 +13,12 @@ exports.getTodoByID = async (req, res, next, Todo_ID) => {
 }
 
 exports.addTodo = async (req, res) => {
+    const errors = validationResult(req);
+
+    if(!errors.isEmpty()) {
+        return res.json({ errorMessage: errors.array()[0].msg });
+    }   
+
     const data = req.body;
     const { message } = data; // De-Structure data object
 
@@ -42,6 +49,12 @@ exports.getTodos = async (req, res) => {
 }
 
 exports.editTodo = async (req, res) => {
+    const errors = validationResult(req);
+
+    if(!errors.isEmpty()) {
+        return res.json({ errorMessage: errors.array()[0].msg });
+    } 
+    
     const todo = req.todo; // Fetching Todo From Request Object
     const data = req.body;
     const { message } = data;
