@@ -5,9 +5,11 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "client": "cd client && npm start",
-    "dev": "nodemon app.js",
-    "prod": "concurrently -n 'Server, Client' -c 'red, green' \"nodemon app.js\" \"npm run client\""
+    "server": "nodemon app.js",
+    "client-install": "cd client && npm start",
+    "client": "npm install --prefic client",
+    "dev": "concurrently -n 'Server, Client' \"nodemon app.js\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "Ajay Sharma",
   "license": "ISC",
