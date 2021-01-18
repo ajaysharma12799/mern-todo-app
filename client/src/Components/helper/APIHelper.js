@@ -1,5 +1,9 @@
 import API from '../../Backend';
 
+export const getSingleTodo = async () => {
+    return await fetch(`${API}/`)
+}
+
 export const getTodos = async () => {
     return await fetch(`${API}/getTodos`, {
         method: 'GET'
@@ -41,7 +45,7 @@ export const editTodos = async (TodoID, UpdatedTodo) => {
         return response.json();
     } )
     .catch( (error) => {
-        console.log(`error from edittodo : ${error}`);
+        console.log(error);
     } );
 }
 
@@ -56,6 +60,6 @@ export const deleteTodos = async (TodoID) => {
         return response.json();
     } )
     .catch( (error) => {
-        console.log(`error from deletetodos : ${error}`);
+        console.log(error);
     } );
 }  

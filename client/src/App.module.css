@@ -1,0 +1,91 @@
+/*  
+    Desktop Design
+*/
+
+.SharpBorder {
+    border-radius: 0;
+}
+
+.ButtonRight {
+    float: right;
+}  
+
+.Form {
+    width: 50%;
+    text-align: center;
+    margin-top: 3% !important;
+}
+
+.Table {
+    margin-top: 5% !important;
+}
+
+.AlertWidth {
+    width: 50%;
+}
+
+.NotFound {
+    margin-top: 5% !important;
+    font-weight: 300;
+}
+
+.isCompleted {
+    opacity: 0.5;
+    text-decoration: line-through;
+}
+
+
+/* 
+    Responsive Design
+*/
+
+/* Design For Extra Small Devices ( Max-Width of 600px ) */
+@media only screen and (max-width:600px) {
+    .Form {
+        width: 100%;
+        text-align: center;
+        margin-top: 3% !important;
+    }
+
+    .Table {
+        margin-top: 5% !important;
+    }
+
+    .AlertWidth {
+        width: 100%;
+    }
+}
+
+/* Design For Small Devices ( Min-Width of 600px and UP ) */
+@media only screen and (min-width:600px) {
+    .Form {
+        width: 100%;
+        text-align: center;
+        margin-top: 3% !important;
+    }
+
+    .Table {
+        margin-top: 5% !important;
+    }
+
+    .AlertWidth {
+        width: 100%;
+    }
+}
+
+/* Design For Medium Devices ( Min-Width of 768px and UP ) */
+@media only screen and (min-width:768px) {
+    .Form {
+        width: 100%;
+        text-align: center;
+        margin-top: 3% !important;
+    }
+
+    .Table {
+        margin-top: 5% !important;
+    }
+
+    .AlertWidth {
+        width: 100%;
+    }
+}
