@@ -1,10 +1,13 @@
 const router = require("express").Router();
 const { getTodoByID, addTodo, getTodos, editTodo, deleteTodo } = require("../controllers/TodoControllers");
+const { check } = require('express-validator');
 
 router.param("Todo_ID", getTodoByID); // Find Specific Todo From DB
 
 // Route To Add Todo
-router.post("/addTodo", addTodo);
+router.post("/addTodo",[
+    check('message', 'Task Should be Above 5 Character Length').isLength({ min:5 })
+] , addTodo);
 
 // Route To List All Todos
 router.get("/getTodos", getTodos);
