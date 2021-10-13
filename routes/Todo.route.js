@@ -36,7 +36,6 @@ router.put('/:id', Auth, async (req, res) => { // Update Single Todo
     try {
         const todoFields = {};
         const {title, description, priority, isCompleted} = req.body;
-        console.log(title, description, priority, isCompleted)
 
         // Building Todo Object
         if(title) todoFields.title = title;
@@ -46,7 +45,7 @@ router.put('/:id', Auth, async (req, res) => { // Update Single Todo
 
         let todo = await TodoModel.findById(req.params.id);
         if(!todo) { // Check If Todo is Present or Not
-            return res.status(404).json({msg: "No Todo Found"});
+            return res.status(404).json({msg: "Todo Not Found"});
         }
         if(todo.user.toString() !== req.user.id) { // Check whether todo is owned by user or not
             return res.status(401).json({msg: "Not Authorized"});
@@ -59,13 +58,24 @@ router.put('/:id', Auth, async (req, res) => { // Update Single Todo
         });
         res.json(todo);
     } catch (error) {
-        console.log(error)
         return res.status(500).json({msg: "Server Error"});
     }
 });
 
-router.delete('/:id', async (req, res) => { // Delete Single Todo
-    res.send("Delete Todo");
+router.delete('/:id', Auth, async (req, res) => { // Delete Single Todo
+    try {
+        let todo = await TodoModel.findById(req.params.id);
+        if(!todo) {
+            return res.status(404).json({msg: "Todo Not Found"});
+        }
+        if(todo.user.toString() !== req.user.id) { // Check whether todo is owned by user or not
+            return res.status(401).json({msg: "Not Authorized"});
+        }
+        await TodoModel.findByIdAndDelete(req.params.id);
+        res.json({msg: "Todo Removed Successfully"});
+    } catch (error) {
+        return res.status(500).json({msg: "Server Error"});
+    }
 });
 
 module.exports = router;
