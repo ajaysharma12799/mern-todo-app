@@ -1,13 +1,11 @@
-import React from 'react';
-
-import Todo from './Components/TODO/Todo';
+import React from 'react'
 
 const App = () => {
   return (
     <div>
-      <Todo />
+      MERN Todo App
     </div>
   )
 }
 
-export default App;
+export default App
