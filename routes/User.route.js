@@ -3,8 +3,6 @@ const UserModel = require("../models/User.model");
 const bcrypt = require("bcryptjs");
 const {check, validationResult} = require("express-validator");
 const jwt = require("jsonwebtoken");
-const isAdmin = require("../utils/isAdmin");
-const Auth = require("../utils/Auth");
 const router = express.Router();
 
 // Register User Route - Public
@@ -45,14 +43,8 @@ router.post("/", [
             res.json({token});
         });
     } catch (error) {
-        console.error(error.message);
         res.status(500).send("Server Error");
     }
 });
-
-router.get('/', [Auth, isAdmin], (req, res) => {
-    res.send("Admin Route");
-})
-
 
 module.exports = router;
