@@ -37,7 +37,10 @@ router.post("/", [
         }
         const payload = {
             user: {
-                id: user.id
+                id: user.id,
+                email: user.email,
+                name: user.username,
+                role: user.role
             }
         };
         jwt.sign(payload, process.env.JWTSECRET, {expiresIn: 3600}, (error, token) => {
