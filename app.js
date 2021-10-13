@@ -1,37 +1,29 @@
-// require("dotenv").config();
 const express = require("express");
-const bodyParser = require('body-parser');
 const ConnectDB = require("./config/DatabaseConfig");
 const cors = require("cors");
-const path = require('path');
-const TodoRoutes = require("./routes/TodoRoutes");
 
-const PORT = 3100 || process.env.PORT;
+const PORT = 5000 || process.env.PORT;
 
 const app = express();
 
 // Creating application/json Parser 
-app.use(bodyParser.json());
-
+app.use(express.json());
 // Creating application/x-www-form-urlencoded Parser
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
+
+if(process.env.NODE_ENV === 'development') {
+    require("dotenv").config();
+}
 
 // Database Connection
 ConnectDB();
 
 // 3rd Party Dependency
 app.use(cors());
-app.use('/api/', TodoRoutes);
-
-// Server Static Assets if We are in Production
-if(process.env.NODE_ENV === 'production') {
-    // Set Static Folder
-    app.use(express.static('client/build'));
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-    });
-}
+app.use('/api/auth', require("./routes/Auth.route"));
+app.use('/api/user', require("./routes/User.route"));
+app.use('/api/todo', require("./routes/Todo.route"));
 
 app.listen( PORT, () => {
     console.log(`Server is Running at ${ PORT }`);
-} );
+});
